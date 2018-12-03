@@ -1,25 +1,29 @@
+import 'package:accomplisher/models/goals_model.dart';
 import 'package:accomplisher/ui/scaffold.dart';
 import 'package:accomplisher/ui/widgets/add_goal.dart';
 import 'package:accomplisher/ui/widgets/goal_card.dart';
 import 'package:accomplisher/ui/widgets/list_card.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-class GoalScreen extends StatefulWidget {
+// class GoalScreen extends StatefulWidget {
+//   static const String routeName = "/GoalScreen";
+
+//   @override
+//   _GoalScreenState createState() => new _GoalScreenState();
+// }
+
+class GoalScreen extends StatelessWidget {
   static const String routeName = "/GoalScreen";
 
-  @override
-  _GoalScreenState createState() => new _GoalScreenState();
-}
-
-class _GoalScreenState extends State<GoalScreen> {
-  List<ListCard> _goalsList = <ListCard>[];
-
-  Widget _buildGoalList() {
-    _goalsList.add(AddGoalCard());
+  Widget _buildGoalList(List<Goal> goals) {
+    List<ListCard> _goals = goals.map<ListCard>((g) => new GoalCard(title: g.title))
+      .toList();
     
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: _goalsList,
+    _goals.add(AddGoalCard());
+
+    return ListView(
+      children: _goals,
     );
   }
 
@@ -27,7 +31,12 @@ class _GoalScreenState extends State<GoalScreen> {
   Widget build(BuildContext context) {
     return AScaffold(
       appBarTitle: 'Goals',
-      body: _buildGoalList(),
+      body: ScopedModel<GoalsModel>(
+        model: new GoalsModel(),
+        child: new ScopedModelDescendant<GoalsModel>(
+          builder: (context, child, model) => _buildGoalList(model.goals)
+        )
+      ),
       navigatorIndex: 1,
     );
   }
