@@ -11,11 +11,13 @@ class Goal {
 }
 
 class GoalsModel extends Model {
-  List<Goal> goals = List<Goal>();
+  List<Goal> _goals = List<Goal>();
+  List<Goal> get goals => _goals;
 
-  void addGoal(String title) {
-    Goal _newGoal = new Goal(title);
-    this.goals.insert(0, _newGoal);
+  void addGoal(Goal goal) {
+    this._goals.insert(0, goal);
+    print(this._goals);
+    print(this.goals);
 
     notifyListeners();
   }

@@ -7,5 +7,5 @@ class AColors {
 
   static const Color background = const Color(0xFFEEEEEE);
 
-  static final ThemeData mainTheme = ThemeData();
+  // static final ThemeData mainTheme = ThemeData();
 }

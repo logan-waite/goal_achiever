@@ -8,8 +8,9 @@ class ListCard extends StatelessWidget {
   final IconData icon;
   final String goalText;
   final GoalCardAction action;
+  final BuildContext context;
 
-  ListCard({
+  ListCard(this.context, {
     this.icon,
     this.goalText,
     this.action
