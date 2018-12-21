@@ -3,6 +3,7 @@ import 'package:accomplisher/ui/screens/accomplished_screen.dart';
 import 'package:accomplisher/ui/screens/goal_screen.dart';
 import 'package:accomplisher/ui/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class AScaffold extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorState = GlobalKey();

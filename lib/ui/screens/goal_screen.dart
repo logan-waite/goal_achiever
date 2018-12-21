@@ -1,4 +1,4 @@
-import 'package:accomplisher/models/goals_model.dart';
+import 'package:accomplisher/app_state_container.dart';
 import 'package:accomplisher/ui/scaffold.dart';
 import 'package:accomplisher/ui/widgets/add_goal.dart';
 import 'package:accomplisher/ui/widgets/goal_card.dart';
@@ -8,29 +8,25 @@ import 'package:scoped_model/scoped_model.dart';
 
 class GoalScreen extends StatelessWidget {
   static const String routeName = "/GoalScreen";
+  List<Goal> _goals;
 
-  Widget _buildGoalList(BuildContext context, List<Goal> goals) {
+  static Widget _buildGoalList(BuildContext context, List<Goal> goals) {
     print(goals);
     List<ListCard> _goals = goals.map<ListCard>((g) => new GoalCard(context, title: g.title))
       .toList();
-    print(goals);
     _goals.add(AddGoalCard(context));
+    // print(_goals);
 
-    return ListView(
-      children: _goals,
-    );
+    return new ListView(children: _goals);
   }
 
   @override
   Widget build(BuildContext context) {
+    _goals = AppStateContainer.of(context).goals;
+
     return AScaffold(
       appBarTitle: 'Goals',
-      body: ScopedModel<GoalsModel>(
-        model: new GoalsModel(),
-        child: new ScopedModelDescendant<GoalsModel>(
-          builder: (context, child, model) => print("hefllo")// _buildGoalList(context, model.goals)
-        )
-      ),
+      body: _buildGoalList(context, _goals),
       navigatorIndex: 1,
     );
   }

@@ -1,9 +1,12 @@
-import 'package:accomplisher/models/goals_model.dart';
+import 'package:accomplisher/app_state_container.dart';
+// import 'package:accomplisher/models/goals_model.dart';
+import 'package:accomplisher/ui/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class NewGoalScreen extends StatelessWidget {
   static const String routeName = "/NewGoal";
+  List<Goal> goals;
 
   InputDecoration _inputStyles() {
     return InputDecoration(
@@ -12,7 +15,8 @@ class NewGoalScreen extends StatelessWidget {
     );
   }
 
-  Widget _newGoalForm (model) {
+
+  Widget _newGoalForm(context) {
     final _formKey = GlobalKey<FormState>();
     return Form(
       key: _formKey,
@@ -29,16 +33,18 @@ class NewGoalScreen extends StatelessWidget {
               },
             ),
           ),
-          RaisedButton(
-              onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
-                if (_formKey.currentState.validate()) {
-                  model.addGoal(new Goal("This is a new goal"));                  
-                }
-              },
-              child: Text('Submit'),
-          )
+         RaisedButton(
+          onPressed: () {
+            // Validate will return true if the form is valid, or false if
+            // the form is invalid.
+            if (_formKey.currentState.validate()) {
+              AppStateContainer.of(context).addGoal(Goal("This is a new goal"));
+              print("...");
+              print(goals);                
+            }
+          },
+          child: Text('Submit'),
+        )
         ]
       )
     );
@@ -46,16 +52,12 @@ class NewGoalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Set New Goal")
-      ),
-      body: ScopedModel<GoalsModel>(
-        model: GoalsModel(),
-        child: ScopedModelDescendant<GoalsModel>(
-          builder: (context, child, model) => _newGoalForm(model)
-        )
-      )
+    final container = AppStateContainer.of(context);
+    goals = container.goals;
+
+    return AScaffold(
+      appBarTitle: "Set New Goal",
+      body: _newGoalForm(context)
     );
   }
 }

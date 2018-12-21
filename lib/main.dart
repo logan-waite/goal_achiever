@@ -1,3 +1,4 @@
+import 'package:accomplisher/app_state_container.dart';
 import 'package:accomplisher/ui/screens/accomplished_screen.dart';
 import 'package:accomplisher/ui/screens/goal_screen.dart';
 import 'package:accomplisher/ui/screens/new_goal_screen.dart';
@@ -7,7 +8,11 @@ import 'package:accomplisher/ui/colors.dart';
 import 'package:accomplisher/strings.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(new GoalAchiever());
+void main() => runApp(new AppStateContainer(
+    child: new GoalAchiever()
+  )
+);
+
 
 class MyCustomRoute<T> extends MaterialPageRoute<T> {
   MyCustomRoute({ WidgetBuilder builder, RouteSettings settings })
