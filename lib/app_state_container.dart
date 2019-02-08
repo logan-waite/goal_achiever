@@ -1,31 +1,16 @@
 import 'package:accomplisher/models/app_state.dart';
+import 'package:accomplisher/models/goals_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Goal {
-  String title;
-  double percentComplete;
-
-  Goal(this.title, {
-    this.percentComplete = 0.0
-  });
-}
-
 class _AppStateContainerState extends State<AppStateContainer> {
   // AppState state;
-  List<Goal> goals;
+  GoalsModel goalState = new GoalsModel();
 
   @override
   void initState() {
-    goals = new List<Goal>();
-
+    // goalState ;
     super.initState();
-  }
-
-  void addGoal(Goal goal) {
-    setState(() {
-      goals.insert(0, goal);
-    });
   }
 
   @override

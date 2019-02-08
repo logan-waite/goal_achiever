@@ -1,3 +1,4 @@
+import 'package:accomplisher/strings.dart';
 import 'package:accomplisher/ui/colors.dart';
 import 'package:accomplisher/ui/screens/accomplished_screen.dart';
 import 'package:accomplisher/ui/screens/goal_screen.dart';
@@ -10,14 +11,16 @@ class AScaffold extends StatefulWidget {
 
   final String appBarTitle;
   final Widget body;
-  final Color background;
+  final Color backgroundColor;
   final int navigatorIndex;
+  final Widget floatingActionButton;
 
   AScaffold({
     this.appBarTitle,
     this.body,
-    this.background = AColors.background,
-    this.navigatorIndex = 1
+    this.backgroundColor = AColors.background,
+    this.navigatorIndex = 1,
+    this.floatingActionButton,
   });
 
   @override
@@ -28,15 +31,15 @@ class _AScaffoldState extends State<AScaffold> {
   List<BottomNavigationBarItem> _navBarItems = [
     BottomNavigationBarItem(
       icon: Icon(Icons.whatshot),
-      title: Text("Accomplished")
+      title: Text(strings().accomplished)
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.track_changes),
-      title: Text('Goals'),
+      title: Text(strings().goals),
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.settings),
-      title: Text("Settings")
+      title: Text(strings().settings)
     )
   ];
 
@@ -66,20 +69,22 @@ class _AScaffoldState extends State<AScaffold> {
 
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    body: Container(
-      color: widget.background,
-      child: widget.body
-    ),
-    appBar: AppBar(
-      title: _buildAppBarTitle(),
-    ),
-    bottomNavigationBar: BottomNavigationBar(
-      items: _navBarItems,
-      onTap: _onItemTapped,
-      currentIndex: widget.navigatorIndex,
-      fixedColor: AColors.primary,
-    ),
-  );
+    return Scaffold(
+      body: Container(
+        // color: widget.background,
+        child: widget.body
+      ),
+      appBar: AppBar(
+        title: _buildAppBarTitle(),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: _navBarItems,
+        onTap: _onItemTapped,
+        currentIndex: widget.navigatorIndex,
+        fixedColor: AColors.primary,
+      ),
+      floatingActionButton: widget.floatingActionButton,
+      backgroundColor: widget.backgroundColor,
+    );
   }
 }

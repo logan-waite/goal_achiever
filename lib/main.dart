@@ -1,5 +1,6 @@
 import 'package:accomplisher/app_state_container.dart';
 import 'package:accomplisher/ui/screens/accomplished_screen.dart';
+import 'package:accomplisher/ui/screens/add_action_steps_screen.dart';
 import 'package:accomplisher/ui/screens/goal_screen.dart';
 import 'package:accomplisher/ui/screens/new_goal_screen.dart';
 import 'package:accomplisher/ui/screens/settings_screen.dart';
@@ -33,7 +34,8 @@ class GoalAchiever extends StatelessWidget {
     GoalScreen.routeName : new GoalScreen(),
     AccomplishedScreen.routeName : new AccomplishedScreen(),
     SettingsScreen.routeName : new SettingsScreen(),
-    NewGoalScreen.routeName : new NewGoalScreen()
+    NewGoalScreen.routeName : new NewGoalScreen(),
+    AddActionStepsScreen.routeName : new AddActionStepsScreen(),
   };
 
  @override
